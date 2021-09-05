@@ -1,0 +1,156 @@
+<!-- tab start -->
+<header>
+    <nav class="navbar navbar-black bg-black">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-4 col-4"> 
+                    <a role="button" class="text-center ">
+                        Menu 
+                     </a>
+                </div>
+                <div class="col-lg-4 col-4 "> 
+                    <a role="button" class="text-center">
+                       Home 
+                    </a>
+                </div>
+                <div class=" col-lg-4 col-4 "> 
+                    <a role="button" class="text-center">
+                      Booking  
+                    </a>
+                </div>
+                <div class="col-lg-3 col-3 text-center right-account"> 
+                    <a role="button" class="text-center">
+                        Account  
+                      </a>
+                </div>
+            </div>
+        </div>
+      </nav>
+
+    
+</header>
+  <!-- header end -->
+  
+<div class="container-fluid container-class">
+    <div class="row ">
+        <div class=" col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card ">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <h4 class="heading">Book a Seat</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                        <!-- form start -->
+                            <form [formGroup]="AddSeatForm" (ngSubmit)="BookTicket()">
+                                <div class="row">
+                                    <div class="col-lg-4 col-12 text-center form-floating mb-3">
+                                        <input type="email" class="form-control input-type" id="email" formControlName="email"
+                                            placeholder="Email">
+                                        <label for="email">Email</label>
+                                            <div [ngClass] = "'error'" *ngIf="AddSeatForm.get('email').invalid  && isValidFormSubmitted != null && !isValidFormSubmitted">Email must be a valid email address</div>
+                                    </div>
+                                    <div class="col-lg-4 col-12 text-center form-floating mb-3">
+                                        <select class="form-control input-type" formControlName="seat">
+                                            <option value="" [selected]="true" >Choose No. of Ticket</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                        </select>
+                                        <label >No. of Seats</label>
+                                        <div *ngIf="AddSeatForm.get('seat').invalid && isValidFormSubmitted != null && !isValidFormSubmitted" [ngClass] = "'error'"> 
+                                            Choose no of ticket.
+                                         </div>
+                                    </div>
+                                    <div class="col-lg-4 col-12 text-center form-floating mb-3">
+                                        <input [attr.min]="todayDate" type="date" class="form-control input-type" formControlName="date"
+                                            placeholder="Date">
+                                        <label >Date</label>
+                                        <div *ngIf="AddSeatForm.get('date').invalid && isValidFormSubmitted != null && !isValidFormSubmitted" [ngClass] = "'error'"> 
+                                            Date is required.
+                                         </div>
+                                    </div>
+                                    <div class="col-12 text-center">
+                                        <button type="submit" class="btn btn-success mb-3" >
+                                                Book
+                                        </button>
+                                        <div *ngIf="msg!='' && !status" [ngClass] = "'error'"> 
+                                            <b>{{ msg }}</b>
+                                         </div>
+                                         <div *ngIf="msg!='' && status" [ngClass] = "'success'"> 
+                                            <b>{{ msg }}</b>
+                                         </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <!-- form end -->
+                        </div>
+                    </div>
+                    <div *ngIf="seatList.length!=0" class="row">
+                        <div class="col-12 text-center">
+                            <h4 class="heading">Booking Details</h4>
+                        </div>
+                        
+                        <div class="col-7 text-center">
+                            <h4 class="heading">All Seats</h4>
+                        </div>
+                        <div class="col-5 text-center">
+                            <h4 class="heading">Path</h4>
+                        </div>
+                        <ng-container *ngFor="let listSeat of seatList; let i=index;">
+                            <div *ngIf="i!=0 && i%7==0" class="col-5 text-center">
+                                |&nbsp;&nbsp;&nbsp;|
+                            </div>
+                            
+                            <div class="col-1 text-center ">
+                                <button *ngIf="listSeat.seat_status=='Booked Seat'" type="button" class="btn btn-primary m-3" >
+                                    {{ listSeat.seat_no }}
+                                </button>
+                                <button *ngIf="listSeat.seat_status=='Booked By You'" type="button" class="btn btn-success m-3" >
+                                    {{ listSeat.seat_no }}
+                                </button>
+                                <button *ngIf="listSeat.seat_status=='Vacant Seat'" type="button" class="btn btn-secondary m-3" >
+                                    {{ listSeat.seat_no }}
+                                </button>
+                                <!-- <span class="circle">
+                                    {{ seatNumber }}
+                                </span>-->
+                            </div>
+                        </ng-container>
+
+                        
+                    </div> 
+
+                    <div class="row">
+                        <div class="col-12 text-center ">
+                            <h4 class="heading">Seat</h4>
+                        </div>
+                        <div class="col-12 text-center ">
+                            <button  type="button" class="btn btn-primary m-3" >
+                                Booked Seat
+                            </button>
+                        </div>
+                        <div class="col-12 text-center ">
+                            <button type="button" class="btn btn-success m-3" >
+                                Booked By You
+                            </button>
+                        </div>
+                        <div class="col-12 text-center ">
+                            <button type="button" class="btn btn-secondary m-3" >
+                                Vacant Seat
+                            </button>
+                        </div>
+                    </div>
+                     
+                </div>
+              </div>
+        </div>
+    </div> 
+
+</div> 

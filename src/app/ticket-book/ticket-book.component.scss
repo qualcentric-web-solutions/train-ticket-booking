@@ -1,0 +1,33 @@
+/** header style start **/
+.right-account{
+    position: absolute;
+    right: 0px;
+}
+/** header style end **/
+/** ticket style start **/
+.container-class{
+    margin-top: 10px;
+}
+.error{
+    padding-top: 5px;
+    color: red;
+    font-size: 14px;
+}
+.success{
+    padding-top: 5px;
+    color: green;
+    font-size: 14px;
+}
+.heading{
+    font-size: 20px;
+    color: #4E4E5A;
+    font-weight: bold;
+}
+.circle{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 1px solid #292931;
+    background-color: yellow;
+}
+/** ticket style end **/
