@@ -19,6 +19,7 @@ export class TicketBookComponent implements OnInit {
   isValidFormSubmitted: any = null;
   msg: string='';
   status: boolean=false;
+  readStatus: boolean= false;
   
   constructor(
     private formBuilder: FormBuilder,
@@ -94,6 +95,11 @@ export class TicketBookComponent implements OnInit {
       });
       return
     }
+    if(this.AddSeatForm.get('seat').value>7){
+      this.status=false;
+      this.msg="Please enter number of ticket less then 7";
+      return
+    }
     this.isValidFormSubmitted = 1;
     const formData = new FormData();
     formData.append("username", this.AddSeatForm.get('email').value);
@@ -104,6 +110,7 @@ export class TicketBookComponent implements OnInit {
     this.webService.postMethod(
       formData, this.constant.seatBooking
       ).subscribe(response => {
+        //this.readStatus=true;
         this.isCompleted=false;
         if(response.flag==true){
           this.isCompleted=false;

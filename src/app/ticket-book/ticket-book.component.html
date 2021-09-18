@@ -53,16 +53,8 @@
                                             <div [ngClass] = "'error'" *ngIf="AddSeatForm.get('email').invalid  && isValidFormSubmitted != null && !isValidFormSubmitted">Email must be a valid email address</div>
                                     </div>
                                     <div class="col-lg-4 col-12 text-center form-floating mb-3">
-                                        <select class="form-control input-type" formControlName="seat">
-                                            <option value="" [selected]="true" >Choose No. of Ticket</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
-                                            <option value="5">5</option>
-                                            <option value="6">6</option>
-                                            <option value="7">7</option>
-                                        </select>
+                                        <input min="1" type="number" [readOnly]="readStatus" class="form-control input-type" id="seat" formControlName="seat"
+                                            placeholder="Enter number of ticket/seat">
                                         <label >No. of Seats</label>
                                         <div *ngIf="AddSeatForm.get('seat').invalid && isValidFormSubmitted != null && !isValidFormSubmitted" [ngClass] = "'error'"> 
                                             Choose no of ticket.
@@ -101,7 +93,7 @@
                             <h4 class="heading">All Seats</h4>
                         </div>
                         <div class="col-5 text-center">
-                            <h4 class="heading">Path</h4>
+                            <h4 class="heading">Gallery</h4>
                         </div>
                         <ng-container *ngFor="let listSeat of seatList; let i=index;">
                             <div *ngIf="i!=0 && i%7==0" class="col-5 text-center">
